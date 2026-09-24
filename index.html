@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KNEW — Know More. Do More.</title>
+
+  <style>
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+    body {
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+      background: #f7f9fc;
+
+      color: #172033;
+
+      line-height: 1.5;
+
+    }
+
+    header {
+
+      background: white;
+
+      border-bottom: 1px solid #e7ebf2;
+
+      padding: 18px 6%;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 10;
+
+    }
+
+    .logo {
+
+      font-size: 30px;
+
+      font-weight: 800;
+
+      letter-spacing: -1px;
+
+    }
+
+    .logo span {
+
+      color: #4f7cff;
+
+    }
+
+    nav a {
+
+      text-decoration: none;
+
+      color: #172033;
+
+      margin-left: 25px;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+    }
+
+    .hero {
+
+      min-height: 78vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 70px 20px;
+
+      background:
+
+        radial-gradient(circle at top right, #dfe8ff 0, transparent 35%),
+
+        radial-gradient(circle at bottom left, #e7f8ff 0, transparent 35%),
+
+        #f7f9fc;
+
+    }
+
+    .hero-content {
+
+      max-width: 850px;
+
+    }
+
+    .badge {
+
+      display: inline-block;
+
+      background: #e9efff;
+
+      color: #4168d8;
+
+      padding: 8px 15px;
+
+      border-radius: 30px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      margin-bottom: 22px;
+
+    }
+
+    h1 {
+
+      font-size: clamp(48px, 8vw, 82px);
+
+      line-height: 0.98;
+
+      letter-spacing: -4px;
+
+      margin-bottom: 25px;
+
+    }
+
+    h1 span {
+
+      color: #4f7cff;
+
+    }
+
+    .hero p {
+
+      max-width: 650px;
+
+      margin: 0 auto 35px;
+
+      color: #657086;
+
+      font-size: 20px;
+
+    }
+
+    .buttons {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 14px;
+
+      flex-wrap: wrap;
+
+    }
+
+    button {
+
+      border: none;
+
+      cursor: pointer;
+
+      padding: 15px 25px;
+
+      border-radius: 12px;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      transition: 0.2s;
+
+    }
+
+    .primary {
+
+      background: #4f7cff;
+
+      color: white;
+
+    }
+
+    .primary:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 10px 25px rgba(79,124,255,0.25);
+
+    }
+
+    .secondary {
+
+      background: white;
+
+      color: #172033;
+
+      border: 1px solid #dce2ec;
+
+    }
+
+    section {
+
+      padding: 80px 6%;
+
+    }
+
+    .section-title {
+
+      text-align: center;
+
+      max-width: 700px;
+
+      margin: 0 auto 45px;
+
+    }
+
+    .section-title h2 {
+
+      font-size: 40px;
+
+      letter-spacing: -1.5px;
+
+      margin-bottom: 12px;
+
+    }
+
+    .section-title p {
+
+      color: #69758a;
+
+    }
+
+    .cards {
+
+      max-width: 1100px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 22px;
+
+    }
+
+    .card {
+
+      background: white;
+
+      border: 1px solid #e7ebf2;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      box-shadow: 0 10px 30px rgba(25,40,70,0.05);
+
+    }
+
+    .icon {
+
+      width: 48px;
+
+      height: 48px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background: #edf2ff;
+
+      color: #4f7cff;
+
+      font-size: 22px;
+
+      margin-bottom: 20px;
+
+    }
+
+    .card h3 {
+
+      margin-bottom: 10px;
+
+      font-size: 21px;
+
+    }
+
+    .card p {
+
+      color: #69758a;
+
+      font-size: 15px;
+
+    }
+
+    .demo {
+
+      background: #111827;
+
+      color: white;
+
+      text-align: center;
+
+    }
+
+    .demo-box {
+
+      max-width: 850px;
+
+      margin: 35px auto 0;
+
+      background: #1c2638;
+
+      border: 1px solid #303c52;
+
+      border-radius: 20px;
+
+      padding: 35px;
+
+    }
+
+    .demo-box p {
+
+      color: #b8c1d2;
+
+      margin-bottom: 22px;
+
+    }
+
+    .input-area {
+
+      display: flex;
+
+      gap: 10px;
+
+      max-width: 650px;
+
+      margin: auto;
+
+    }
+
+    input {
+
+      flex: 1;
+
+      padding: 15px;
+
+      border-radius: 10px;
+
+      border: 1px solid #3a465b;
+
+      background: #111827;
+
+      color: white;
+
+      font-size: 15px;
+
+    }
+
+    .result {
+
+      display: none;
+
+      margin-top: 25px;
+
+      padding: 20px;
+
+      border-radius: 12px;
+
+      background: #26334a;
+
+      color: #dce5f7;
+
+      text-align: left;
+
+    }
+
+    footer {
+
+      background: white;
+
+      border-top: 1px solid #e7ebf2;
+
+      text-align: center;
+
+      padding: 30px;
+
+      color: #7b8598;
+
+      font-size: 14px;
+
+    }
+
+    @media (max-width: 750px) {
+
+      nav {
+
+        display: none;
+
+      }
+
+      .cards {
+
+        grid-template-columns: 1fr;
+
+      }
+
+      .input-area {
+
+        flex-direction: column;
+
+      }
+
+      h1 {
+
+        letter-spacing: -2px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">K<span>NEW</span></div>
+
+    <nav>
+
+      <a href="#technology">Technology</a>
+
+      <a href="#demo">AI Demo</a>
+
+      <a href="#about">About</a>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="badge">KNEW — AI Intelligence Platform</div>
+
+        <h1>
+
+          Know more.<br>
+
+          <span>Do more.</span>
+
+        </h1>
+
+        <p>
+
+          KNEW is being built to make powerful artificial intelligence
+
+          simpler, more visual and more useful for everyday people and
+
+          businesses.
+
+        </p>
+
+        <div class="buttons">
+
+          <button class="primary" onclick="startKnew()">
+
+            Explore KNEW
+
+          </button>
+
+          <button class="secondary" onclick="showDemo()">
+
+            Try AI Demo
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="technology">
+
+      <div class="section-title">
+
+        <h2>One platform. Powerful possibilities.</h2>
+
+        <p>
+
+          KNEW is designed around intelligent tools that help people
+
+          understand, create and visualise.
+
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+
+          <div class="icon">✦</div>
+
+          <h3>AI Intelligence</h3>
+
+          <p>
+
+            Turn complex questions and information into clear,
+
+            useful answers.
+
+          </p>
+
+        </div>
+
+        <div class="card">
+
+          <div class="icon">◈</div>
+
+          <h3>Visualisation</h3>
+
+          <p>
+
+            Transform ideas into visual concepts that are easier
+
+            to understand and explore.
+
+          </p>
+
+        </div>
+
+        <div class="card">
+
+          <div class="icon">⚡</div>
+
+          <h3>Smart Tools</h3>
+
+          <p>
+
+            Bring intelligent capabilities together in one
+
+            simple experience.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="demo" class="demo">
+
+      <div class="section-title">
+
+        <h2>Experience the idea.</h2>
+
+        <p>
+
+          This is an early KNEW Beta Core demonstration.
+
+        </p>
+
+      </div>
+
+      <div class="demo-box">
+
+        <p>
+
+          Enter something you'd like KNEW to help you with.
+
+        </p>
+
+        <div class="input-area">
+
+          <input
+
+            id="knewInput"
+
+            type="text"
+
+            placeholder="Ask KNEW something..."
+
+          >
+
+          <button class="primary" onclick="askKnew()">
+
+            Ask KNEW
+
+          </button>
+
+        </div>
+
+        <div id="result" class="result"></div>
+
+      </div>
+
+    </section>
+
+    <section id="about">
+
+      <div class="section-title">
+
+        <h2>The beginning of KNEW.</h2>
+
+        <p>
+
+          KNEW Beta Core is the foundation for a much larger
+
+          AI platform. The aim is to build useful intelligence
+
+          into a clean and accessible experience.
+
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    © 2026 KNEW. Beta Core.
+
+  </footer>
+
+  <script>
+
+    function startKnew() {
+
+      document
+
+        .getElementById("demo")
+
+        .scrollIntoView({ behavior: "smooth" });
+
+    }
+
+    function showDemo() {
+
+      document
+
+        .getElementById("demo")
+
+        .scrollIntoView({ behavior: "smooth" });
+
+      setTimeout(function() {
+
+        document.getElementById("knewInput").focus();
+
+      }, 600);
+
+    }
+
+    function askKnew() {
+
+      const input =
+
+        document.getElementById("knewInput");
+
+      const result =
+
+        document.getElementById("result");
+
+      const question =
+
+        input.value.trim();
+
+      if (!question) {
+
+        result.style.display = "block";
+
+        result.innerHTML =
+
+          "Enter a question or idea and KNEW will respond.";
+
+        return;
+
+      }
+
+      result.style.display = "block";
+
+      result.innerHTML =
+
+        "<strong>KNEW Beta Core</strong><br><br>" +
+
+        "I've received your request:<br><br>" +
+
+        "“" + question.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "”" +
+
+        "<br><br>" +
+
+        "The live AI intelligence layer will be connected to this interface in the next stage of the KNEW build.";
+
+    }
+
+  </script>
+
+</body>
+
+</html>
