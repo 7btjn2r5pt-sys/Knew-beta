@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNEW Beta</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f8fb;
+  color: #17202a;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #667085;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.box {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  padding: 15px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #111827;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+#result {
+  display: none;
+  margin-top: 25px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>KNEW</h1>
+
+<div class="subtitle">
+Know more. Do more.
+</div>
+
+<div class="box">
+
+<textarea id="knewInput" placeholder="Ask KNEW anything..."></textarea>
+
+<button onclick="askKnew()">Ask KNEW</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+async function askKnew() {
+
+  const input = document.getElementById("knewInput");
+  const result = document.getElementById("result");
+
+  const question = input.value.trim();
+
+  if (!question) {
+    result.style.display = "block";
+    result.innerHTML = "Please enter a question.";
+    return;
+  }
+
+  result.style.display = "block";
+  result.innerHTML = "KNEW is thinking...";
+
+  try {
+
+    const response = await fetch(
+      "https://knew-beta-seven.vercel.app/api/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: question
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "KNEW could not respond."
+      );
+    }
+
+    const answer = String(
+      data.answer || "No answer received."
+    );
+
+    result.innerHTML =
+      "<strong>KNEW</strong><br><br>" +
+      answer
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br>");
+
+  } catch (error) {
+
+    result.innerHTML =
+      "<strong>KNEW Beta Core</strong><br><br>" +
+      "There is currently a connection problem with the AI service.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
