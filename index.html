@@ -663,74 +663,81 @@
   </footer>
 
   <script>
+async function askKnew() {
 
-    function startKnew() {
+  const input = document.getElementById("knewInput");
+  const result = document.getElementById("result");
 
-      document
+  const question = input.value.trim();
 
-        .getElementById("demo")
+  if (!question) {
+    result.style.display = "block";
+    result.innerHTML = "Please enter a question.";
+    return;
+  }
 
-        .scrollIntoView({ behavior: "smooth" });
+  result.style.display = "block";
+  result.innerHTML = "KNEW is thinking...";
 
-    }
+  try {
 
-    function showDemo() {
-
-      document
-
-        .getElementById("demo")
-
-        .scrollIntoView({ behavior: "smooth" });
-
-      setTimeout(function() {
-
-        document.getElementById("knewInput").focus();
-
-      }, 600);
-
-    }
-
-    function askKnew() {
-
-      const input =
-
-        document.getElementById("knewInput");
-
-      const result =
-
-        document.getElementById("result");
-
-      const question =
-
-        input.value.trim();
-
-      if (!question) {
-
-        result.style.display = "block";
-
-        result.innerHTML =
-
-          "Enter a question or idea and KNEW will respond.";
-
-        return;
-
+    const response = await fetch(
+      "https://knew-beta-seven.vercel.app/api/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: question
+        })
       }
+    );
 
-      result.style.display = "block";
+    const data = await response.json();
 
-      result.innerHTML =
-
-        "<strong>KNEW Beta Core</strong><br><br>" +
-
-        "I've received your request:<br><br>" +
-
-        "“" + question.replace(/</g, "&lt;").replace(/>/g, "&gt;") + "”" +
-
-        "<br><br>" +
-
-        "The live AI intelligence layer will be connected to this interface in the next stage of the KNEW build.";
-
+    if (!response.ok) {
+      throw new Error(
+        data.error || "KNEW could not respond."
+      );
     }
+
+    result.innerHTML =
+      "<strong>KNEW</strong><br><br>" +
+      data.answer
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br>");
+
+  } catch (error) {
+
+    result.style.display = "block";
+
+    result.innerHTML =
+      "<strong>KNEW Beta Core</strong><br><br>" +
+      "I'm having trouble connecting to the AI service right now.";
+  }
+}
+
+
+function startKnew() {
+  document
+    .getElementById("demo")
+    .scrollIntoView({ behavior: "smooth" });
+}
+
+
+function showDemo() {
+
+  document
+    .getElementById("demo")
+    .scrollIntoView({ behavior: "smooth" });
+
+  setTimeout(function() {
+    document.getElementById("knewInput").focus();
+  }, 600);
+}
 
   </script>
 
